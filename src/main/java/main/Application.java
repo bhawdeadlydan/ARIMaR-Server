@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootApplication
-@EntityScan(basePackages = {"gis", "controllers", "dao"}) // to scan for @entity in the specified packages
-@ComponentScan(basePackages = {"gis", "controllers", "dao" } ) // to scan fot @component in the specified packages
+@EntityScan(basePackages = {"gis", "main", "dao"}) // to scan for @entity in the specified packages
+@ComponentScan(basePackages = {"gis", "main", "dao" } ) // to scan fot @component in the specified packages
 @EnableJpaRepositories("dao") // to scan for @repository in the specified packages
 public class Application{
 
