@@ -1,5 +1,7 @@
 package gis;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -23,10 +25,26 @@ public class GisController {
 	@RequestMapping(value="/findall", method = RequestMethod.GET)
 	@ResponseBody
 	public String findById(@RequestParam("id") long id){
-		String result = "";
-		result = repository.findOne(id).toString();
-		return result + " found";
+		Points object = repository.findOne(id);
+		return object.toString();
 	}
+	
+	//findall/amenity?id=cafe
+	@RequestMapping(value="/findall/amenity", method = RequestMethod.GET)
+	@ResponseBody
+	public String findByAmenity(@RequestParam("id") String id){
+		List<Points> object = repository.findByAmenity(id);
+		return object.toString();
+	}
+	
+	//findall/higway?id=traffic_signals
+	@RequestMapping(value="/findall/highway", method = RequestMethod.GET)
+	@ResponseBody
+	public String findByHigway(@RequestParam("id") String id){
+		List<Points> object = repository.findByHighway(id);
+		return object.toString();
+	}
+	
 	
 /*	public GisController() {
 		
