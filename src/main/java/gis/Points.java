@@ -11,7 +11,6 @@ import javax.persistence.Table;
 @Table(name = "planet_osm_point")
 public class Points {
 
-	//private static final long serialVersionUID = -3009157732242241606L;
 	@Id
 	@Column(name = "osm_id")
 	private long osm_id;
