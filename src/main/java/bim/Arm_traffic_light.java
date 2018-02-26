@@ -6,15 +6,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
   
 /**
  * This class represents the arm_traffic_light table to the spring boot framework
  * The parameters used are:
- *  @param traffic_light_id traffic light id, type long
- *  @param feu  , type long
- *  @param tys  , type long
- *  @param type , type long
- *  @param tl_controller_id controller id, type long
+ *  @param traffic_light_id traffic light id, type int
+ *  @param feu  , type int
+ *  @param tys  , type int
+ *  @param type , type int
+ *  @param tl_controller_id controller id, type int
  * @author JoelCarneiro
  *
  */
@@ -27,23 +28,23 @@ public class Arm_traffic_light {
 	@GeneratedValue
 	@NotNull
 	@Column(name = "traffic_light_id")
-	private long traffic_light_id;
+	private int traffic_light_id;
 
 	@Column(name = "feu")
-	private long feu;
+	private int feu;
 
 	@Column(name = "tys") 
-	private long tys;
+	private int tys;
 
 	@Column(name = "type") 
-	private long type;
+	private Integer type;
 
 	@Column(name = "tl_controller_id")
-	private long tl_controller_id;
+	private int tl_controller_id;
 
 	protected Arm_traffic_light() {}
 
-	public Arm_traffic_light(long traffic_light_id, long feu, long tys, long type, long tl_controller_id) {
+	public Arm_traffic_light(int traffic_light_id, int feu, int tys, Integer type, int tl_controller_id) {
 		this.traffic_light_id = traffic_light_id;
 		this.feu = feu;
 		this.tys = tys;
@@ -58,43 +59,43 @@ public class Arm_traffic_light {
 	}
 
 	//getters and setters
-	public long getTraffic_light_id() {
+	public int getTraffic_light_id() {
 		return traffic_light_id;
 	}
 
-	public void setTraffic_light_id(long traffic_light_id) {
+	public void setTraffic_light_id(int traffic_light_id) {
 		this.traffic_light_id = traffic_light_id;
 	}
 
-	public long getFeu() {
+	public int getFeu() {
 		return feu;
 	}
 
-	public void setFeu(long feu) {
+	public void setFeu(int feu) {
 		this.feu = feu;
 	}
 
-	public long getTys() {
+	public int getTys() {
 		return tys;
 	}
 
-	public void setTys(long tys) {
+	public void setTys(int tys) {
 		this.tys = tys;
 	}
 
-	public long getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(long type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
-	public long getTl_controller_id() {
+	public int getTl_controller_id() {
 		return tl_controller_id;
 	}
 
-	public void setTl_controller_id(long tl_controller_id) {
+	public void setTl_controller_id(int tl_controller_id) {
 		this.tl_controller_id = tl_controller_id;
 	}
 	

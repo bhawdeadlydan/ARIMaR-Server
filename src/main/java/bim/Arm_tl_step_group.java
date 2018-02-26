@@ -10,9 +10,9 @@ import javax.validation.constraints.NotNull;
 /**
  * This class represents the arm_tl_step_group table to the spring boot framework
  * The parameters used are:
- *  @param tl_step_group_id , type long
- *  @param tl_step_id  , type long
- *  @param tl_group_id  , type long
+ *  @param tl_step_group_id , type int
+ *  @param tl_step_id  , type int
+ *  @param tl_group_id  , type int
  * @author JoelCarneiro
  *
  */
@@ -24,17 +24,17 @@ public class Arm_tl_step_group {
 	@GeneratedValue
 	@NotNull
 	@Column(name = "tl_step_group_id")
-	private long tl_step_group_id;
+	private int tl_step_group_id;
 
 	@Column(name = "tl_step_id")
-	private long tl_step_id;
+	private int tl_step_id;
 
 	@Column(name = "tl_group_id") 
-	private long tl_group_id;
+	private int tl_group_id;
 	
 	protected Arm_tl_step_group() {}
 
-	public Arm_tl_step_group(long tl_step_group_id, long tl_step_id, long tl_group_id) {
+	public Arm_tl_step_group(int tl_step_group_id, int tl_step_id, int tl_group_id) {
 		this.tl_step_group_id = tl_step_group_id;
 		this.tl_step_id = tl_step_id;
 		this.tl_group_id = tl_group_id;
@@ -48,27 +48,27 @@ public class Arm_tl_step_group {
 	}
 
 	//getters and setters
-	public long getTl_step_group_id() {
+	public int getTl_step_group_id() {
 		return tl_step_group_id;
 	}
 
-	public void setTl_step_group_id(long tl_step_group_id) {
+	public void setTl_step_group_id(int tl_step_group_id) {
 		this.tl_step_group_id = tl_step_group_id;
 	}
 
-	public long getTl_step_id() {
+	public int getTl_step_id() {
 		return tl_step_id;
 	}
 
-	public void setTl_step_id(long tl_step_id) {
+	public void setTl_step_id(int tl_step_id) {
 		this.tl_step_id = tl_step_id;
 	}
 
-	public long getTl_group_id() {
+	public int getTl_group_id() {
 		return tl_group_id;
 	}
 
-	public void setTl_group_id(long tl_group_id) {
+	public void setTl_group_id(int tl_group_id) {
 		this.tl_group_id = tl_group_id;
 	}
 	

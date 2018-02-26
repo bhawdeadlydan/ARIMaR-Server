@@ -10,6 +10,6 @@ import bim.Arm_tl_Step;
 
 @Transactional 
 @Repository
-public interface Arm_tl_step extends CrudRepository<Arm_tl_Step, Serializable> {
+public interface Arm_tl_step_repository extends CrudRepository<Arm_tl_Step, Serializable> {
 
 }
