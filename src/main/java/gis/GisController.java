@@ -21,7 +21,7 @@ public class GisController {
 	GisRepository repository;
 
 		
-	//findall?id=2805976805
+	//find?id=2805976805
 	@RequestMapping(value="/find", method = RequestMethod.GET)
 	@ResponseBody
 	public String findById(@RequestParam("id") long id){
@@ -33,7 +33,7 @@ public class GisController {
 		return object.toString();
 	}
 	
-	//findall/amenity?id=cafe
+	//find/amenity?id=cafe
 	@RequestMapping(value="/find/amenity", method = RequestMethod.GET)
 	@ResponseBody
 	public String findByAmenity(@RequestParam("id") String id){
@@ -44,7 +44,7 @@ public class GisController {
 		return object.toString();
 	}
 	
-	//findall/higway?id=traffic_signals
+	//find/highway?id=traffic_signals
 	@RequestMapping(value="/find/highway", method = RequestMethod.GET)
 	@ResponseBody
 	public String findByHigway(@RequestParam("id") String id){
