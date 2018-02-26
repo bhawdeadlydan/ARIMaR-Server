@@ -128,8 +128,12 @@ public class BimController {
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
-
-		return object;
+		dtoObject.setTraffic_light_id(object.getTraffic_light_id());
+		dtoObject.setFeu(object.getFeu());
+		dtoObject.setTys(object.getTys());
+		dtoObject.setTl_Traffic_controller_id(object.getTl_controller_id());
+		
+		return dtoObject;
 	}
 
 
