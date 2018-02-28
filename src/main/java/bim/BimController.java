@@ -15,6 +15,7 @@ import bimDao.Arm_tl_step_group_repository;
 import bimDao.Arm_tl_step_repository;
 import bimDao.Arm_traffic_light_repository;
 import bimDao.BimCrosswalksRepository;
+import bimDao.BimEspirasRepository;
 import bimDao.BimIntersectionRepository;
 import main.DTO;
 
@@ -45,7 +46,10 @@ public class BimController {
 
 	@Autowired
 	BimIntersectionRepository bim_intersection_repository;
-	
+
+	@Autowired
+	BimEspirasRepository bim_espiras_repository;
+
 
 	//bim/find/controller?id=1
 	@RequestMapping(value="bim/find/controller", method = RequestMethod.GET)
@@ -168,19 +172,37 @@ public class BimController {
 	}
 
 	//bim/find/intersections?id=1
-		@RequestMapping(value="bim/find/intersections", method = RequestMethod.GET)
-		public Object findByIntersections(@RequestParam("id") int id){
-			Bim_Intersection object = bim_intersection_repository.findOne(id);
-			if(object == null) {
-				return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
-			}
-			// object conversion
-			DTO dtoObject = new DTO();
-			dtoObject.setBim_intersection_id(object.getBim_intersection_id());
-			dtoObject.setBim_intersection_description(object.getBim_intersection_description());
-
-
-			return dtoObject;
+	@RequestMapping(value="bim/find/intersections", method = RequestMethod.GET)
+	public Object findByIntersections(@RequestParam("id") int id){
+		Bim_Intersection object = bim_intersection_repository.findOne(id);
+		if(object == null) {
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
 		}
+		// object conversion
+		DTO dtoObject = new DTO();
+		dtoObject.setBim_intersection_id(object.getBim_intersection_id());
+		dtoObject.setBim_intersection_description(object.getBim_intersection_description());
+
+
+		return dtoObject;
+	}
+
+
+	//bim/find/bim-espiras?id=1
+	@RequestMapping(value="bim/find/bim-espiras", method = RequestMethod.GET)
+	public Object findByBimEspiras(@RequestParam("id") int id){
+		Bim_Espiras object = bim_espiras_repository.findOne(id);
+		if(object == null) {
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+		}
+		// object conversion
+		DTO dtoObject = new DTO();
+		dtoObject.setBim_espiras_id(object.getEspiras_id());
+		dtoObject.setBim_espiras_intersection_id(object.getIntersection_id());
+		dtoObject.setBim_espiras_material_id(object.getMaterial_id());
+		dtoObject.setBim_espiras_tipologia(object.getTipologia());
+
+		return dtoObject;
+	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dao.GisCrosswalksRepository;
+import dao.GisEspirasRepository;
 import dao.GisRepository;
 import main.DTO;
 
@@ -26,6 +27,9 @@ public class GisController {
 
 	@Autowired
 	GisCrosswalksRepository crosswalkRepo;
+	
+	@Autowired
+	GisEspirasRepository espirasRepo;
 
 
 	//gis/find?id=2805976805
@@ -90,6 +94,25 @@ public class GisController {
 
 		return dtoObject;
 	}
+	
+	
+	//gis/find/gis-espiras?id=1
+		@RequestMapping(value="gis/find/gis-espiras", method = RequestMethod.GET)
+		public Object findByGisEspiras(@RequestParam("id") int id){
+			GisEspiras object = espirasRepo.findOne(id);
+			if(object == null) {
+				return "Nothing found! The value entered as id must be misspelt! Type it again. (gis_espiras_id)";
+			}
+			DTO dtoObject = new DTO();
+			dtoObject.setGis_espiras_id(object.getGis_espiras_id());
+			dtoObject.setGis_espiras_intersection_id(object.getGis_espiras_intersection_id());
+			
+			Position pos = object.getEspiras_coordinates().getPosition();			
+			dtoObject.setGis_espiras_coordinatesX(pos.getCoordinate(0));
+			dtoObject.setGis_espiras_coordinatesY(pos.getCoordinate(1));
+
+			return dtoObject;
+		}
 
 
 	/*	public GisController() {

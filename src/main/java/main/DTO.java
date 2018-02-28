@@ -1,5 +1,8 @@
 package main;
 
+
+import javax.persistence.Column;
+
 import org.geolatte.geom.Point;
 import org.geolatte.geom.Position;
 
@@ -63,7 +66,18 @@ public class DTO{
 	//bim_intersection
 	private int bim_intersection_id;
 	private String bim_intersection_description;
+	
+	//gis_espiras
+	private int gis_espiras_id;
+	private int gis_espiras_intersection_id;
+	private double gis_espiras_coordinatesX;
+	private double gis_espiras_coordinatesY;
 
+	//bim_Espiras
+	private int bim_espiras_id;
+	private int bim_espiras_intersection_id;
+	private int bim_espiras_material_id;
+	private String bim_espiras_tipologia;
 
     /**
      *  empty contructor
@@ -459,6 +473,86 @@ public class DTO{
 
 	public void setBim_intersection_description(String bim_intersection_description) {
 		this.bim_intersection_description = bim_intersection_description;
+	}
+
+
+	public int getGis_espiras_id() {
+		return gis_espiras_id;
+	}
+
+
+	public void setGis_espiras_id(int gis_espiras_id) {
+		this.gis_espiras_id = gis_espiras_id;
+	}
+
+
+	public int getGis_espiras_intersection_id() {
+		return gis_espiras_intersection_id;
+	}
+
+
+	public void setGis_espiras_intersection_id(int gis_espiras_intersection_id) {
+		this.gis_espiras_intersection_id = gis_espiras_intersection_id;
+	}
+
+
+	public double getGis_espiras_coordinatesX() {
+		return gis_espiras_coordinatesX;
+	}
+
+
+	public void setGis_espiras_coordinatesX(double gis_espiras_coordinatesX) {
+		this.gis_espiras_coordinatesX = gis_espiras_coordinatesX;
+	}
+
+
+	public double getGis_espiras_coordinatesY() {
+		return gis_espiras_coordinatesY;
+	}
+
+
+	public void setGis_espiras_coordinatesY(double gis_espiras_coordinatesY) {
+		this.gis_espiras_coordinatesY = gis_espiras_coordinatesY;
+	}
+
+
+	public int getBim_espiras_id() {
+		return bim_espiras_id;
+	}
+
+
+	public void setBim_espiras_id(int bim_espiras_id) {
+		this.bim_espiras_id = bim_espiras_id;
+	}
+
+
+	public int getBim_espiras_intersection_id() {
+		return bim_espiras_intersection_id;
+	}
+
+
+	public void setBim_espiras_intersection_id(int bim_espiras_intersection_id) {
+		this.bim_espiras_intersection_id = bim_espiras_intersection_id;
+	}
+
+
+	public int getBim_espiras_material_id() {
+		return bim_espiras_material_id;
+	}
+
+
+	public void setBim_espiras_material_id(int bim_espiras_material_id) {
+		this.bim_espiras_material_id = bim_espiras_material_id;
+	}
+
+
+	public String getBim_espiras_tipologia() {
+		return bim_espiras_tipologia;
+	}
+
+
+	public void setBim_espiras_tipologia(String bim_espiras_tipologia) {
+		this.bim_espiras_tipologia = bim_espiras_tipologia;
 	}
 	
 	
