@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import dao.GisCrosswalksRepository;
 import dao.GisRepository;
 import main.DTO;
 
@@ -23,8 +24,11 @@ public class GisController {
 	@Autowired
 	GisRepository repository;
 
+	@Autowired
+	GisCrosswalksRepository crosswalkRepo;
 
-	//find?id=2805976805
+
+	//gis/find?id=2805976805
 	@RequestMapping(value="gis/find", method = RequestMethod.GET)
 	public Object findById(@RequestParam("id") long id){
 		Points object = repository.findOne(id);
@@ -37,7 +41,7 @@ public class GisController {
 		return dtoObject;
 	}
 
-	//find/amenity?id=cafe
+	//gis/find/amenity?id=cafe
 	@RequestMapping(value="gis/find/amenity", method = RequestMethod.GET)
 	public Object findByAmenity(@RequestParam("id") String id){
 		List<Points> object = repository.findByAmenity(id);
@@ -53,7 +57,7 @@ public class GisController {
 
 	}
 
-	//find/highway?id=traffic_signals
+	//gis/find/highway?id=traffic_signals
 	@RequestMapping(value="gis/find/highway", method = RequestMethod.GET)
 	public Object findByHigway(@RequestParam("id") String id){
 		List<Points> object = repository.findByHighway(id);
@@ -66,6 +70,25 @@ public class GisController {
 			objList.add(dtoObject);
 		}
 		return objList;
+	}
+
+
+	//gis/find/gis-crosswalks?id=1
+	@RequestMapping(value="gis/find/gis-crosswalks", method = RequestMethod.GET)
+	public Object findByGisCrosswalks(@RequestParam("id") int id){
+		GisCrosswalks object = crosswalkRepo.findOne(id);
+		if(object == null) {
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (gis_crosswalk_id)";
+		}
+		DTO dtoObject = new DTO();
+		dtoObject.setGis_crosswalks_id(object.getGis_crosswalks_id());
+		dtoObject.setGis_crosswalks_intersection_id(object.getIntersection_id());
+		
+		Position pos = object.getCrosswalk_coordinates().getPosition();			
+		dtoObject.setGis_crosswalk_coordinatesX(pos.getCoordinate(0));
+		dtoObject.setGis_crosswalk_coordinatesY(pos.getCoordinate(1));
+
+		return dtoObject;
 	}
 
 

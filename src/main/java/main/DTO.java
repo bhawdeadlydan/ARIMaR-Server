@@ -3,9 +3,6 @@ package main;
 import org.geolatte.geom.Point;
 import org.geolatte.geom.Position;
 
-import gis.Points;
-
-
 
 public class DTO{
 
@@ -49,6 +46,24 @@ public class DTO{
 	private int tys;
 	private Integer type;
 	private int tl_Traffic_controller_id;
+	private double coordinatesX; // Point --> geometry
+	private double coordinatesY;
+
+	//gis_crosswalks
+	private int gis_crosswalks_id;
+	private int gis_crosswalks_intersection_id;
+	private double gis_crosswalk_coordinatesX;
+	private double gis_crosswalk_coordinatesY;
+	
+	//bim_crosswalks
+	private int bim_crosswalks_id;
+	private int bim_crosswalks_intersection_id;
+	private int bim_crosswalks_material_id;
+	
+	//bim_intersection
+	private int bim_intersection_id;
+	private String bim_intersection_description;
+
 
     /**
      *  empty contructor
@@ -69,9 +84,9 @@ public class DTO{
 		this.amenity = amenity;
 		this.highway = highway;
 		// coordinates conversion
-		Position test = way.getPosition();
-		this.wayX = test.getCoordinate(0);
-		this.wayY = test.getCoordinate(1);	
+		Position pos = way.getPosition();
+		this.wayX = pos.getCoordinate(0);
+		this.wayY = pos.getCoordinate(1);	
 
 	}
 
@@ -336,6 +351,116 @@ public class DTO{
 		this.tl_Traffic_controller_id = tl_Traffic_controller_id;
 	}
 
+
+	public double getCoordinatesX() {
+		return coordinatesX;
+	}
+
+
+	public void setCoordinatesX(double coordinatesX) {
+		this.coordinatesX = coordinatesX;
+	}
+
+
+	public double getCoordinatesY() {
+		return coordinatesY;
+	}
+
+
+	public void setCoordinatesY(double coordinatesY) {
+		this.coordinatesY = coordinatesY;
+	}
+
+
+	public int getGis_crosswalks_id() {
+		return gis_crosswalks_id;
+	}
+
+
+	public void setGis_crosswalks_id(int gis_crosswalks_id) {
+		this.gis_crosswalks_id = gis_crosswalks_id;
+	}
+
+
+	public int getGis_crosswalks_intersection_id() {
+		return gis_crosswalks_intersection_id;
+	}
+
+
+	public void setGis_crosswalks_intersection_id(int gis_crosswalks_intersection_id) {
+		this.gis_crosswalks_intersection_id = gis_crosswalks_intersection_id;
+	}
+
+
+	public double getGis_crosswalk_coordinatesX() {
+		return gis_crosswalk_coordinatesX;
+	}
+
+
+	public void setGis_crosswalk_coordinatesX(double gis_crosswalk_coordinatesX) {
+		this.gis_crosswalk_coordinatesX = gis_crosswalk_coordinatesX;
+	}
+
+
+	public double getGis_crosswalk_coordinatesY() {
+		return gis_crosswalk_coordinatesY;
+	}
+
+
+	public void setGis_crosswalk_coordinatesY(double gis_crosswalk_coordinatesY) {
+		this.gis_crosswalk_coordinatesY = gis_crosswalk_coordinatesY;
+	}
+
+
+	public int getBim_crosswalks_id() {
+		return bim_crosswalks_id;
+	}
+
+
+	public void setBim_crosswalks_id(int bim_crosswalks_id) {
+		this.bim_crosswalks_id = bim_crosswalks_id;
+	}
+
+
+	public int getBim_crosswalks_intersection_id() {
+		return bim_crosswalks_intersection_id;
+	}
+
+
+	public void setBim_crosswalks_intersection_id(int bim_crosswalks_intersection_id) {
+		this.bim_crosswalks_intersection_id = bim_crosswalks_intersection_id;
+	}
+
+
+	public int getBim_crosswalks_material_id() {
+		return bim_crosswalks_material_id;
+	}
+
+
+	public void setBim_crosswalks_material_id(int bim_crosswalks_material_id) {
+		this.bim_crosswalks_material_id = bim_crosswalks_material_id;
+	}
+
+
+	public int getBim_intersection_id() {
+		return bim_intersection_id;
+	}
+
+
+	public void setBim_intersection_id(int bim_intersection_id) {
+		this.bim_intersection_id = bim_intersection_id;
+	}
+
+
+	public String getBim_intersection_description() {
+		return bim_intersection_description;
+	}
+
+
+	public void setBim_intersection_description(String bim_intersection_description) {
+		this.bim_intersection_description = bim_intersection_description;
+	}
+	
 	
 
 }

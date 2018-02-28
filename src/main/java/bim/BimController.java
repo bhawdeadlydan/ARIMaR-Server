@@ -1,5 +1,6 @@
 package bim;
 
+import org.geolatte.geom.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import bimDao.Arm_tl_plan_repository;
 import bimDao.Arm_tl_step_group_repository;
 import bimDao.Arm_tl_step_repository;
 import bimDao.Arm_traffic_light_repository;
+import bimDao.BimCrosswalksRepository;
+import bimDao.BimIntersectionRepository;
 import main.DTO;
 
 @RestController
@@ -37,6 +40,12 @@ public class BimController {
 	@Autowired
 	Arm_traffic_light_repository traffic_light_repository;
 
+	@Autowired
+	BimCrosswalksRepository bim_crosswalks_repository;
+
+	@Autowired
+	BimIntersectionRepository bim_intersection_repository;
+	
 
 	//bim/find/controller?id=1
 	@RequestMapping(value="bim/find/controller", method = RequestMethod.GET)
@@ -132,10 +141,46 @@ public class BimController {
 		dtoObject.setFeu(object.getFeu());
 		dtoObject.setTys(object.getTys());
 		dtoObject.setTl_Traffic_controller_id(object.getTl_controller_id());
-		
+
+		Position pos = object.getCoordinates().getPosition();	
+		dtoObject.setCoordinatesX(pos.getCoordinate(0));
+		dtoObject.setCoordinatesY(pos.getCoordinate(1));
+
 		return dtoObject;
 	}
 
 
+	//bim/find/bim-crosswalks?id=1
+	@RequestMapping(value="bim/find/bim-crosswalks", method = RequestMethod.GET)
+	public Object findByBimCrosswalks(@RequestParam("id") int id){
+		Bim_Crosswalks object = bim_crosswalks_repository.findOne(id);
+		if(object == null) {
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+		}
+		// object conversion
+		DTO dtoObject = new DTO();
+		dtoObject.setBim_crosswalks_id(object.getBim_crosswalk_id());
+		dtoObject.setBim_crosswalks_intersection_id(object.getBim_intersection_id());
+		dtoObject.setBim_crosswalks_material_id(object.getCrosswalk_material_id());
+
+
+		return dtoObject;
+	}
+
+	//bim/find/intersections?id=1
+		@RequestMapping(value="bim/find/intersections", method = RequestMethod.GET)
+		public Object findByIntersections(@RequestParam("id") int id){
+			Bim_Intersection object = bim_intersection_repository.findOne(id);
+			if(object == null) {
+				return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			}
+			// object conversion
+			DTO dtoObject = new DTO();
+			dtoObject.setBim_intersection_id(object.getBim_intersection_id());
+			dtoObject.setBim_intersection_description(object.getBim_intersection_description());
+
+
+			return dtoObject;
+		}
 
 }

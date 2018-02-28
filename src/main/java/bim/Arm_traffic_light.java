@@ -6,7 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+
+import org.geolatte.geom.Point;
   
 /**
  * This class represents the arm_traffic_light table to the spring boot framework
@@ -16,13 +17,14 @@ import javax.validation.constraints.Null;
  *  @param tys  , type int
  *  @param type , type int
  *  @param tl_controller_id controller id, type int
+ *  @param coordinates, type Point, geolatte
+ *  
  * @author JoelCarneiro
  *
  */
 @Entity
 @Table(name = "arm_traffic_light")
 public class Arm_traffic_light {
-
 
 	@Id
 	@GeneratedValue
@@ -41,15 +43,19 @@ public class Arm_traffic_light {
 
 	@Column(name = "tl_controller_id")
 	private int tl_controller_id;
+	
+	@Column(name = "coordinates")
+	private Point coordinates;
 
 	protected Arm_traffic_light() {}
 
-	public Arm_traffic_light(int traffic_light_id, int feu, int tys, Integer type, int tl_controller_id) {
+	public Arm_traffic_light(int traffic_light_id, int feu, int tys, Integer type, int tl_controller_id, Point coordinates) {
 		this.traffic_light_id = traffic_light_id;
 		this.feu = feu;
 		this.tys = tys;
 		this.type = type;
 		this.tl_controller_id = tl_controller_id;
+		this.coordinates = coordinates;
 	}
 
 	@Override
@@ -97,6 +103,14 @@ public class Arm_traffic_light {
 
 	public void setTl_controller_id(int tl_controller_id) {
 		this.tl_controller_id = tl_controller_id;
+	}
+
+	public Point getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(Point coordinates) {
+		this.coordinates = coordinates;
 	}
 	
 }
