@@ -1,11 +1,7 @@
 package main;
 
-
-import javax.persistence.Column;
-
-import org.geolatte.geom.Point;
-import org.geolatte.geom.Position;
-
+import com.vividsolutions.jts.geom.CoordinateSequence;
+import com.vividsolutions.jts.geom.Point;
 
 public class DTO{
 
@@ -93,14 +89,14 @@ public class DTO{
 	 * @param tags
 	 * @param way
 	 */
-	public DTO(long osm_id, String amenity, String highway, String tags, Point<Position> way){ 
+	public DTO(long osm_id, String amenity, String highway, String tags, Point way){ 
 		this.osm_id = osm_id;
 		this.amenity = amenity;
 		this.highway = highway;
 		// coordinates conversion
-		Position pos = way.getPosition();
-		this.wayX = pos.getCoordinate(0);
-		this.wayY = pos.getCoordinate(1);	
+		CoordinateSequence pos = way.getCoordinateSequence();		
+		this.wayX = pos.getCoordinate(0).x;
+		this.wayY = pos.getCoordinate(0).y;	
 
 	}
 

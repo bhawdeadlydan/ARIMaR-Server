@@ -1,8 +1,12 @@
 package bim;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.geolatte.geom.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +21,7 @@ import bimDao.Arm_traffic_light_repository;
 import bimDao.BimCrosswalksRepository;
 import bimDao.BimEspirasRepository;
 import bimDao.BimIntersectionRepository;
+import gis.Points;
 import main.DTO;
 
 @RestController
@@ -176,7 +181,7 @@ public class BimController {
 	public Object findByIntersections(@RequestParam("id") int id){
 		Bim_Intersection object = bim_intersection_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (intersection_id)";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -193,7 +198,7 @@ public class BimController {
 	public Object findByBimEspiras(@RequestParam("id") int id){
 		Bim_Espiras object = bim_espiras_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (espira_id)";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -205,4 +210,44 @@ public class BimController {
 		return dtoObject;
 	}
 
+
+	
+	//bim/find/bim-crosswalks/two/1/id1=1
+	@RequestMapping(value="bim/find/bim-crosswalks/two/{id}/", method = RequestMethod.GET)
+	public Object findByTwoCross(@PathVariable(value="id") int pathv, @RequestParam int id) {
+		List<Bim_Crosswalks> object = bim_crosswalks_repository.findByTwo(pathv, id);
+		if(object.isEmpty()) {
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (highway)";
+		}
+		List<DTO> objList = new ArrayList<DTO>();
+		for(Bim_Crosswalks ob: object) {
+			DTO dtoObject = new DTO();
+			dtoObject.setBim_crosswalks_id(ob.getBim_crosswalk_id());
+			dtoObject.setBim_crosswalks_intersection_id(ob.getBim_intersection_id());
+			dtoObject.setBim_crosswalks_material_id(ob.getCrosswalk_material_id());
+			objList.add(dtoObject);
+		}
+		return objList;
+	}
+	
+
 }
+
+/*//bim/find/bim-crosswalks/?id=1&id1=1
+	@RequestMapping(value="bim/find/bim-crosswalks/two", method = RequestMethod.GET)
+	public Object findByTwoCross(@RequestParam int id, @RequestParam int id1) {
+		System.out.println(id + "   " + id1 + "\n\n");
+		List<Bim_Crosswalks> object = bim_crosswalks_repository.findByTwo(id, id1);
+		if(object.isEmpty()) {
+			return "Nothing found! The value entered as id must be misspelt! Type it again. (highway)";
+		}
+		List<DTO> objList = new ArrayList<DTO>();
+		for(Bim_Crosswalks ob: object) {
+			DTO dtoObject = new DTO();
+			dtoObject.setBim_crosswalks_id(ob.getBim_crosswalk_id());
+			dtoObject.setBim_crosswalks_intersection_id(ob.getBim_intersection_id());
+			dtoObject.setBim_crosswalks_material_id(ob.getCrosswalk_material_id());
+			objList.add(dtoObject);
+		}
+		return objList;
+	}*/

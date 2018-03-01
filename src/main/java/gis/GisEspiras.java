@@ -7,7 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.geolatte.geom.Point;
+import com.vividsolutions.jts.geom.Point;
+
 
 	/***
 	 * This class represents the gis_espiras table to the spring boot framework
@@ -73,5 +74,6 @@ import org.geolatte.geom.Point;
 			this.espiras_coordinates = espiras_coordinates;
 		}
 
+		
 	
 }

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.geolatte.geom.Point;
+import com.vividsolutions.jts.geom.Point;
 
 /***
  * This class represents the gis_crosswalks table to the spring boot framework
