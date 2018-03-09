@@ -7,7 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.geolatte.geom.Point;
+import com.vividsolutions.jts.geom.Point;
+
   
 /**
  * This class represents the arm_traffic_light table to the spring boot framework
@@ -17,7 +18,7 @@ import org.geolatte.geom.Point;
  *  @param tys  , type int
  *  @param type , type int
  *  @param tl_controller_id controller id, type int
- *  @param coordinates, type Point, geolatte
+ *  @param coordinates, type Point
  *  
  * @author JoelCarneiro
  *

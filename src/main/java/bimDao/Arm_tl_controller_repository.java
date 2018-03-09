@@ -1,6 +1,5 @@
 package bimDao;
 
-import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
 import bim.Arm_tl_Controller;
 

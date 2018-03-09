@@ -3,7 +3,6 @@ package bim;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.geolatte.geom.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vividsolutions.jts.geom.CoordinateSequence;
 
 import bimDao.Arm_tl_controller_repository;
 import bimDao.Arm_tl_group_repository;
@@ -21,6 +22,7 @@ import bimDao.Arm_traffic_light_repository;
 import bimDao.BimCrosswalksRepository;
 import bimDao.BimEspirasRepository;
 import bimDao.BimIntersectionRepository;
+import gis.GisEspiras;
 import gis.Points;
 import main.DTO;
 
@@ -61,7 +63,7 @@ public class BimController {
 	public Object findByController(@RequestParam("id") long id){
 		Arm_tl_Controller object = tl_controller_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (controller_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -76,7 +78,7 @@ public class BimController {
 	public Object findByGroup(@RequestParam("id") int id){
 		Arm_tl_group object = tl_group_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -92,7 +94,7 @@ public class BimController {
 	public Object findByPlan(@RequestParam("id") int id){
 		Arm_tl_plan object = tl_plan_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -109,7 +111,7 @@ public class BimController {
 	public Object findByStepGroup(@RequestParam("id") int id){
 		Arm_tl_step_group object = tl_step_group_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -125,7 +127,7 @@ public class BimController {
 	public Object findByStep(@RequestParam("id") int id){
 		Arm_tl_Step object = tl_step_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -142,7 +144,7 @@ public class BimController {
 	public Object findByTrafficLight(@RequestParam("id") int id){
 		Arm_traffic_light object = traffic_light_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -151,9 +153,9 @@ public class BimController {
 		dtoObject.setTys(object.getTys());
 		dtoObject.setTl_Traffic_controller_id(object.getTl_controller_id());
 
-		Position pos = object.getCoordinates().getPosition();	
-		dtoObject.setCoordinatesX(pos.getCoordinate(0));
-		dtoObject.setCoordinatesY(pos.getCoordinate(1));
+		CoordinateSequence pos = object.getCoordinates().getCoordinateSequence();
+		dtoObject.setCoordinatesX(pos.getCoordinate(0).x);
+		dtoObject.setCoordinatesY(pos.getCoordinate(0).y);
 
 		return dtoObject;
 	}
@@ -164,7 +166,7 @@ public class BimController {
 	public Object findByBimCrosswalks(@RequestParam("id") int id){
 		Bim_Crosswalks object = bim_crosswalks_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (group_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -181,7 +183,7 @@ public class BimController {
 	public Object findByIntersections(@RequestParam("id") int id){
 		Bim_Intersection object = bim_intersection_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (intersection_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -198,7 +200,7 @@ public class BimController {
 	public Object findByBimEspiras(@RequestParam("id") int id){
 		Bim_Espiras object = bim_espiras_repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (espira_id)";
+			return "null";
 		}
 		// object conversion
 		DTO dtoObject = new DTO();
@@ -211,13 +213,13 @@ public class BimController {
 	}
 
 
-	
-	//bim/find/bim-crosswalks/two/1/id1=1
+
+	//bim/find/bim-crosswalks/two/1/id=1
 	@RequestMapping(value="bim/find/bim-crosswalks/two/{id}/", method = RequestMethod.GET)
 	public Object findByTwoCross(@PathVariable(value="id") int pathv, @RequestParam int id) {
 		List<Bim_Crosswalks> object = bim_crosswalks_repository.findByTwo(pathv, id);
 		if(object.isEmpty()) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (highway)";
+			return "null";
 		}
 		List<DTO> objList = new ArrayList<DTO>();
 		for(Bim_Crosswalks ob: object) {
@@ -229,7 +231,34 @@ public class BimController {
 		}
 		return objList;
 	}
-	
+
+
+
+	//find/traffic-lights/two/coordx/coordy=1
+	@RequestMapping(value="find/traffic-lights/two/{coordx}/", method = RequestMethod.GET)
+	public Object findTrafficLightsAround(@PathVariable(value="coordx") double coordx, @RequestParam(value="coordy") double coordy){
+		//query
+		List<Arm_traffic_light> object = traffic_light_repository.findInfraAround(coordx, coordy);
+		if(object.isEmpty()) {
+			return "null";
+		}
+		List<DTO> objList = new ArrayList<DTO>();
+		for(Arm_traffic_light ob: object) {
+			//object conversion
+			DTO dtoObject = new DTO();
+			dtoObject.setTraffic_light_id(ob.getTraffic_light_id());
+			dtoObject.setFeu(ob.getFeu());
+			dtoObject.setTys(ob.getTys());
+			dtoObject.setTl_Traffic_controller_id(ob.getTl_controller_id());
+			
+			CoordinateSequence pos = ob.getCoordinates().getCoordinateSequence();	
+			dtoObject.setCoordinatesX(pos.getCoordinate(0).x);
+			dtoObject.setCoordinatesY(pos.getCoordinate(0).y);
+
+			objList.add(dtoObject);
+		}
+		return objList;
+	}
 
 }
 

@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.CoordinateSequence;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
 
 import dao.GisCrosswalksRepository;
 import dao.GisEspirasRepository;
@@ -40,9 +37,8 @@ public class GisController {
 	public Object findById(@RequestParam("id") long id){
 		Points object = repository.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (osm_id)";
+			return "null";
 		}
-		@SuppressWarnings("unchecked")
 		DTO dtoObject = new DTO(object.getOsm_id(), object.getAmenity(), object.getHighway(), object.getTags(), object.getWay());
 
 		return dtoObject;
@@ -69,7 +65,7 @@ public class GisController {
 	public Object findByHigway(@RequestParam("id") String id){
 		List<Points> object = repository.findByHighway(id);
 		if(object.isEmpty()) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (highway)";
+			return "null";
 		}
 		List<DTO> objList = new ArrayList<DTO>();
 		for(Points ob: object) {
@@ -85,7 +81,7 @@ public class GisController {
 	public Object findByGisCrosswalks(@RequestParam("id") int id){
 		GisCrosswalks object = crosswalkRepo.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (gis_crosswalk_id)";
+			return "null";
 		}
 		DTO dtoObject = new DTO();
 		dtoObject.setGis_crosswalks_id(object.getGis_crosswalks_id());
@@ -104,7 +100,7 @@ public class GisController {
 	public Object findByGisEspiras(@RequestParam("id") int id){
 		GisEspiras object = espirasRepo.findOne(id);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (gis_espiras_id)";
+			return "null";
 		}
 		DTO dtoObject = new DTO();
 		dtoObject.setGis_espiras_id(object.getGis_espiras_id());
@@ -124,7 +120,7 @@ public class GisController {
 		//query
 		GisEspiras object = espirasRepo.findByCoord(coordx, coordy);
 		if(object == null) {
-			return "Nothing found! The value entered as id must be misspelt! Type it again. (gis_espiras_id)";
+			return "null";
 		}
 		DTO dtoObject = new DTO();
 		dtoObject.setGis_espiras_id(object.getGis_espiras_id());
@@ -136,6 +132,56 @@ public class GisController {
 
 		return dtoObject;
 	}
+
+
+	//find/gis-espiras/two/coordx/coordy=1
+	@RequestMapping(value="find/gis-espiras/two/{coordx}/", method = RequestMethod.GET)
+	public Object findTrafficLightsAround(@PathVariable(value="coordx") double coordx, @RequestParam(value="coordy") double coordy){
+		//query
+		List<GisEspiras> object = espirasRepo.findEspirasAround(coordx, coordy);
+		if(object.isEmpty()) {
+			return "null";
+		}
+		List<DTO> objList = new ArrayList<DTO>();
+		for(GisEspiras ob: object) {
+			//object conversion
+			DTO dtoObject = new DTO();
+			dtoObject.setGis_espiras_id(ob.getGis_espiras_id());
+			dtoObject.setGis_espiras_intersection_id(ob.getGis_espiras_intersection_id());
+
+			CoordinateSequence pos = ob.getEspiras_coordinates().getCoordinateSequence();	
+			dtoObject.setGis_espiras_coordinatesX(pos.getCoordinate(0).x);
+			dtoObject.setGis_espiras_coordinatesY(pos.getCoordinate(0).y);
+
+			objList.add(dtoObject);
+		}
+		return objList;
+	}
+
+	//find/gis-crosswalks/two/coordx/coordy=1
+	@RequestMapping(value="find/gis-crosswalks/two/{coordx}/", method = RequestMethod.GET)
+	public Object findCrosswalksAround(@PathVariable(value="coordx") double coordx, @RequestParam(value="coordy") double coordy){
+		//query
+		List<GisCrosswalks> object = crosswalkRepo.findCrosswalksAround(coordx, coordy);
+		if(object.isEmpty()) {
+			return "null";
+		}
+		List<DTO> objList = new ArrayList<DTO>();
+		for(GisCrosswalks ob: object) {
+			//object conversion
+			DTO dtoObject = new DTO();
+			dtoObject.setGis_crosswalks_id(ob.getGis_crosswalks_id());
+			dtoObject.setGis_crosswalks_intersection_id(ob.getIntersection_id());
+			
+			CoordinateSequence pos = ob.getCrosswalk_coordinates().getCoordinateSequence();	
+			dtoObject.setGis_crosswalk_coordinatesX(pos.getCoordinate(0).x);
+			dtoObject.setGis_crosswalk_coordinatesY(pos.getCoordinate(0).y);
+
+			objList.add(dtoObject);
+		}
+		return objList;
+	}
+
 
 
 	/*	public GisController() {

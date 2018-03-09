@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import org.geolatte.geom.Point;
  
 /**
  * This class represents the arm_tl_group table to the spring boot framework
