@@ -17,6 +17,6 @@ public interface GisEspirasRepository extends CrudRepository<GisEspiras, Seriali
 	@Query(value = "SELECT * FROM gis_espiras WHERE espiras_coordinates = ST_SetSRID(ST_MakePoint(?1, ?2),4326)", nativeQuery = true)
 		GisEspiras findByCoord(double coordx, double coordy);
 	
-	@Query(value = "SELECT * FROM gis_espiras WHERE ST_DWithin(espiras_coordinates, ST_SetSRID(ST_Point(?1, ?2),4326),10)", nativeQuery = true)
+	@Query(value = "SELECT * FROM gis_espiras WHERE ST_DWithin(espiras_coordinates, ST_SetSRID(ST_Point(?1, ?2),4326), 0.00015)", nativeQuery = true)
 		List<GisEspiras> findEspirasAround(double coordx, double coordy);
 }
