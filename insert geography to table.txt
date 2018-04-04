@@ -19,3 +19,6 @@ ALTER TABLE products ADD FOREIGN KEY (product_group_id) REFERENCES product_group
 
 
 ALTER TABLE distributors ADD COLUMN address varchar(30);
+
+//geometry to points
+SELECT * FROM arm_traffic_light, ST_AsText(coordinates) as points ;
