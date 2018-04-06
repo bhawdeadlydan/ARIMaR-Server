@@ -30,20 +30,20 @@ public class Arm_tl_group {
 	private int tl_controller_id;
 	
 	@Column(name = "group_value") 
-	private int group_value;
+	private int groupvalue;
 
 	protected Arm_tl_group() {}
 
 	public Arm_tl_group(int tl_group_id, int tl_controller_id, int group_value) {
 		this.tl_group_id = tl_group_id;
 		this.tl_controller_id = tl_controller_id;
-		this.group_value = group_value;
+		this.groupvalue = group_value;
 	}
 
 	@Override
 	public String toString() {
 		return String.format("tl_group_id='%s', tl_controller_id='%s', group_value='%s'", tl_group_id, tl_controller_id, 
-				group_value);
+				groupvalue);
 	}
 
 	//getters and setters
@@ -64,11 +64,11 @@ public class Arm_tl_group {
 	}
 
 	public int getGroup_value() {
-		return group_value;
+		return groupvalue;
 	}
 
 	public void setGroup_value(int group_value) {
-		this.group_value = group_value;
+		this.groupvalue = group_value;
 	}
 	
 }

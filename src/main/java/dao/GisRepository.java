@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gis.Points;
 
-@Transactional 
+//@Transactional 
 @Repository
 public interface GisRepository extends CrudRepository<Points, Serializable> {
 		List<Points> findByAmenity(String amenity);

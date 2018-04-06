@@ -30,21 +30,21 @@ public class Arm_tl_step_group {
 	private int tl_step_id;
 
 	@Column(name = "tl_group_id") 
-	private int tl_group_id;
+	private int tlgroupid;
 	
 	protected Arm_tl_step_group() {}
 
 	public Arm_tl_step_group(int tl_step_group_id, int tl_step_id, int tl_group_id) {
 		this.tl_step_group_id = tl_step_group_id;
 		this.tl_step_id = tl_step_id;
-		this.tl_group_id = tl_group_id;
+		this.tlgroupid = tl_group_id;
 
 	}
 
 	@Override
 	public String toString() {
 		return String.format("tl_step_group_id='%s', tl_step_id='%s', tl_group_id='%s'", 
-				tl_step_group_id, tl_step_id, tl_group_id);
+				tl_step_group_id, tl_step_id, tlgroupid);
 	}
 
 	//getters and setters
@@ -65,11 +65,11 @@ public class Arm_tl_step_group {
 	}
 
 	public int getTl_group_id() {
-		return tl_group_id;
+		return tlgroupid;
 	}
 
 	public void setTl_group_id(int tl_group_id) {
-		this.tl_group_id = tl_group_id;
+		this.tlgroupid = tl_group_id;
 	}
 	
 }

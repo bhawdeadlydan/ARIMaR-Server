@@ -30,7 +30,7 @@ public class Arm_tl_plan {
 	private int tl_plan_id;
 
 	@Column(name = "tl_controller_id")
-	private int tl_controller_id;
+	private long tlcontrollerid;
 
 	@Column(name = "plan_value") 
 	private int plan_value;
@@ -42,7 +42,7 @@ public class Arm_tl_plan {
 
 	public Arm_tl_plan(int tl_plan_id, int tl_controller_id, int plan_value, int duration) {
 		this.tl_plan_id = tl_plan_id;
-		this.tl_controller_id = tl_controller_id;
+		this.tlcontrollerid = tl_controller_id;
 		this.plan_value = plan_value;
 		this.duration = duration;
 	}
@@ -50,7 +50,7 @@ public class Arm_tl_plan {
 	@Override
 	public String toString() {
 		return String.format("tl_plan_id='%s', tl_controller_id='%s', plan_value='%s', duration='%s'",
-				tl_plan_id, tl_controller_id, plan_value, duration);
+				tl_plan_id, tlcontrollerid, plan_value, duration);
 	}
 
 	//getters and setters
@@ -62,12 +62,12 @@ public class Arm_tl_plan {
 		this.tl_plan_id = tl_plan_id;
 	}
 
-	public int getTl_controller_id() {
-		return tl_controller_id;
+	public long getTl_controller_id() {
+		return tlcontrollerid;
 	}
 
-	public void setTl_controller_id(int tl_controller_id) {
-		this.tl_controller_id = tl_controller_id;
+	public void setTl_controller_id(long tl_controller_id) {
+		this.tlcontrollerid = tl_controller_id;
 	}
 
 	public int getPlan_value() {

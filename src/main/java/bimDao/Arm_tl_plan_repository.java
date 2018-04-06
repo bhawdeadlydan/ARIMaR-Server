@@ -11,5 +11,5 @@ import bim.Arm_tl_plan;
 @Transactional 
 @Repository
 public interface Arm_tl_plan_repository extends CrudRepository<Arm_tl_plan, Serializable> {
-
+	Arm_tl_plan findByTlcontrollerid(long tlcontrollerid);
 }

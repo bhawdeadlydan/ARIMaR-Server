@@ -10,7 +10,7 @@ public class DTO{
 	private String amenity;
 	private String highway;
 	private String tags;
-	private double wayX; // Point --> geometry
+	private double wayX; 
 	private double wayY;
 
 	//tl_controller
@@ -24,7 +24,7 @@ public class DTO{
 
 	//tl_plan
 	private int tl_plan_id;
-	private int tl_Plan_controller_id;
+	private long tl_Plan_controller_id;
 	private int plan_value;
 	private int duration;
 
@@ -45,7 +45,7 @@ public class DTO{
 	private int tys;
 	private Integer type;
 	private int tl_Traffic_controller_id;
-	private double coordinatesX; // Point --> geometry
+	private double coordinatesX; 
 	private double coordinatesY;
 
 	//gis_crosswalks
@@ -57,7 +57,7 @@ public class DTO{
 	//bim_crosswalks
 	private int bim_crosswalks_id;
 	private int bim_crosswalks_intersection_id;
-	private int bim_crosswalks_material_id;
+	private String bim_crosswalks_material_id;
 	
 	//bim_intersection
 	private int bim_intersection_id;
@@ -72,8 +72,15 @@ public class DTO{
 	//bim_Espiras
 	private int bim_espiras_id;
 	private int bim_espiras_intersection_id;
-	private int bim_espiras_material_id;
+	private String bim_espiras_material_id;
 	private String bim_espiras_tipologia;
+	
+	//bim materials
+	private int bim_materials_id;
+	private String materials_name;
+	private String materials_description;
+	private double materials_cost;
+	
 
     /**
      *  empty contructor
@@ -212,12 +219,12 @@ public class DTO{
 	}
 
 
-	public int getTl_Plan_controller_id() {
+	public long getTl_Plan_controller_id() {
 		return tl_Plan_controller_id;
 	}
 
 
-	public void setTl_Plan_controller_id(int tl_Plan_controller_id) {
+	public void setTl_Plan_controller_id(long tl_Plan_controller_id) {
 		this.tl_Plan_controller_id = tl_Plan_controller_id;
 	}
 
@@ -442,12 +449,12 @@ public class DTO{
 	}
 
 
-	public int getBim_crosswalks_material_id() {
+	public String getBim_crosswalks_material_id() {
 		return bim_crosswalks_material_id;
 	}
 
 
-	public void setBim_crosswalks_material_id(int bim_crosswalks_material_id) {
+	public void setBim_crosswalks_material_id(String bim_crosswalks_material_id) {
 		this.bim_crosswalks_material_id = bim_crosswalks_material_id;
 	}
 
@@ -532,12 +539,12 @@ public class DTO{
 	}
 
 
-	public int getBim_espiras_material_id() {
+	public String getBim_espiras_material_id() {
 		return bim_espiras_material_id;
 	}
 
 
-	public void setBim_espiras_material_id(int bim_espiras_material_id) {
+	public void setBim_espiras_material_id(String bim_espiras_material_id) {
 		this.bim_espiras_material_id = bim_espiras_material_id;
 	}
 
@@ -549,6 +556,46 @@ public class DTO{
 
 	public void setBim_espiras_tipologia(String bim_espiras_tipologia) {
 		this.bim_espiras_tipologia = bim_espiras_tipologia;
+	}
+
+
+	public int getBim_materials_id() {
+		return bim_materials_id;
+	}
+
+
+	public void setBim_materials_id(int bim_materials_id) {
+		this.bim_materials_id = bim_materials_id;
+	}
+
+
+	public String getMaterials_name() {
+		return materials_name;
+	}
+
+
+	public void setMaterials_name(String materials_name) {
+		this.materials_name = materials_name;
+	}
+
+
+	public String getMaterials_description() {
+		return materials_description;
+	}
+
+
+	public void setMaterials_description(String materials_description) {
+		this.materials_description = materials_description;
+	}
+
+
+	public double getMaterials_cost() {
+		return materials_cost;
+	}
+
+
+	public void setMaterials_cost(double materials_cost) {
+		this.materials_cost = materials_cost;
 	}
 	
 	

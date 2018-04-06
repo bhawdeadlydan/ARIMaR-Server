@@ -22,6 +22,7 @@ import bimDao.Arm_traffic_light_repository;
 import bimDao.BimCrosswalksRepository;
 import bimDao.BimEspirasRepository;
 import bimDao.BimIntersectionRepository;
+import bimDao.BimMaterialsRepository;
 import gis.GisEspiras;
 import gis.Points;
 import main.DTO;
@@ -56,6 +57,9 @@ public class BimController {
 
 	@Autowired
 	BimEspirasRepository bim_espiras_repository;
+	
+	@Autowired
+	BimMaterialsRepository bim_materials_repository;
 
 
 	//bim/find/controller?id=1
@@ -156,7 +160,42 @@ public class BimController {
 		CoordinateSequence pos = object.getCoordinates().getCoordinateSequence();
 		dtoObject.setCoordinatesX(pos.getCoordinate(0).x);
 		dtoObject.setCoordinatesY(pos.getCoordinate(0).y);
+		
+		
+		//bim_intersection
+		Bim_Intersection intersectionObject = bim_intersection_repository.findOne(1);
+		dtoObject.setBim_intersection_id(intersectionObject.getBim_intersection_id());
+		dtoObject.setBim_intersection_description(intersectionObject.getBim_intersection_description());
+		
+		//tl_controller
+		Arm_tl_Controller controllerObject = tl_controller_repository.findByCmpintersectionid(intersectionObject.getBim_intersection_id());
+		dtoObject.setTl__Controller_controller_id(controllerObject.getTl_controller_id());
 
+		
+		// tl_group
+		Arm_tl_group tl_groupObject = tl_group_repository.findByGroupValueANDController(object.getFeu(), controllerObject.getTl_controller_id());
+		dtoObject.setTl_group_id(tl_groupObject.getTl_group_id());
+				
+		
+		//tl_step_group		
+		Arm_tl_step_group groupObject = tl_step_group_repository.findByTlgroupid(tl_groupObject.getTl_group_id());
+		dtoObject.setTl_step_group_id(groupObject.getTl_step_group_id());
+		dtoObject.setTl_step_id(groupObject.getTl_step_id());
+		
+		
+		//tl_step
+		Arm_tl_Step stepObject = tl_step_repository.findOne(groupObject.getTl_step_id());
+		dtoObject.setStep_value(stepObject.getStep_value());
+		dtoObject.setMax_step_time(stepObject.getMax_step_time());
+		
+		
+		//tl_plan
+		Arm_tl_plan planObject = tl_plan_repository.findByTlcontrollerid(controllerObject.getTl_controller_id());
+		dtoObject.setTl_plan_id(planObject.getTl_plan_id());
+		dtoObject.setPlan_value(planObject.getPlan_value());
+		dtoObject.setDuration(planObject.getDuration());
+		
+		
 		return dtoObject;
 	}
 
@@ -172,8 +211,10 @@ public class BimController {
 		DTO dtoObject = new DTO();
 		dtoObject.setBim_crosswalks_id(object.getBim_crosswalk_id());
 		dtoObject.setBim_crosswalks_intersection_id(object.getBim_intersection_id());
-		dtoObject.setBim_crosswalks_material_id(object.getCrosswalk_material_id());
-
+				
+		//material
+		Bim_Materials materialObject = bim_materials_repository.findOne(object.getCrosswalk_material_id());
+		dtoObject.setBim_crosswalks_material_id(materialObject.getMaterialsname());
 
 		return dtoObject;
 	}
@@ -206,7 +247,10 @@ public class BimController {
 		DTO dtoObject = new DTO();
 		dtoObject.setBim_espiras_id(object.getEspiras_id());
 		dtoObject.setBim_espiras_intersection_id(object.getIntersection_id());
-		dtoObject.setBim_espiras_material_id(object.getMaterial_id());
+		//material
+		Bim_Materials materialObject = bim_materials_repository.findOne(object.getMaterial_id());
+		dtoObject.setBim_espiras_material_id(materialObject.getMaterialsname());
+		
 		dtoObject.setBim_espiras_tipologia(object.getTipologia());
 
 		return dtoObject;
@@ -226,7 +270,10 @@ public class BimController {
 			DTO dtoObject = new DTO();
 			dtoObject.setBim_crosswalks_id(ob.getBim_crosswalk_id());
 			dtoObject.setBim_crosswalks_intersection_id(ob.getBim_intersection_id());
-			dtoObject.setBim_crosswalks_material_id(ob.getCrosswalk_material_id());
+			//material
+			Bim_Materials materialObject = bim_materials_repository.findOne(ob.getCrosswalk_material_id());
+			dtoObject.setBim_crosswalks_material_id(materialObject.getMaterialsname());
+			
 			objList.add(dtoObject);
 		}
 		return objList;

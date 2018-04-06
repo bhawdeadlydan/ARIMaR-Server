@@ -27,18 +27,18 @@ public class Arm_tl_Controller {
 	private long tl_controller_id;
 
 	@Column(name = "cmp_intersection_id")
-	private long cmp_intersection_id;
+	private long cmpintersectionid;
 
 	protected Arm_tl_Controller() {}
 
 	public Arm_tl_Controller(long tl_controller_id, long cmp_longersection_id) {
 		this.tl_controller_id = tl_controller_id;
-		this.cmp_intersection_id = cmp_longersection_id;
+		this.cmpintersectionid = cmp_longersection_id;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("tl_controller_id='%s',  cmp_longersection_id='%s'", tl_controller_id, cmp_intersection_id);
+		return String.format("tl_controller_id='%s',  cmp_longersection_id='%s'", tl_controller_id, cmpintersectionid);
 	}
 
 	//getters and setters
@@ -51,11 +51,11 @@ public class Arm_tl_Controller {
 	}
 
 	public long getCmp_longersection_id() {
-		return cmp_intersection_id;
+		return cmpintersectionid;
 	}
 
 	public void setCmp_longersection_id(long cmp_longersection_id) {
-		this.cmp_intersection_id = cmp_longersection_id;
+		this.cmpintersectionid = cmp_longersection_id;
 	}
 
 	

@@ -15,6 +15,6 @@ import bim.Arm_traffic_light;
 @Repository
 public interface Arm_traffic_light_repository extends CrudRepository<Arm_traffic_light, Serializable> {
 
-	@Query(value = "SELECT * FROM arm_traffic_light WHERE ST_DWithin(coordinates, ST_SetSRID(ST_Point(?1,?2),4326), 0.00015)", nativeQuery = true)
+	@Query(value = "SELECT * FROM arm_traffic_light WHERE ST_DWithin(coordinates, ST_SetSRID(ST_Point(?1,?2),4326), 0.0003)", nativeQuery = true)
 		List<Arm_traffic_light> findInfraAround(double coordx, double coordy);
 }
