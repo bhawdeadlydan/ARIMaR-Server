@@ -47,16 +47,20 @@ public class Arm_traffic_light {
 	
 	@Column(name = "coordinates")
 	private Point coordinates;
+	
+	@Column(name = "signal_Orientation")
+	private int signal_Orientation;
 
 	protected Arm_traffic_light() {}
 
-	public Arm_traffic_light(int traffic_light_id, int feu, int tys, Integer type, int tl_controller_id, Point coordinates) {
+	public Arm_traffic_light(int traffic_light_id, int feu, int tys, Integer type, int tl_controller_id, Point coordinates, int signal_Orientation) {
 		this.traffic_light_id = traffic_light_id;
 		this.feu = feu;
 		this.tys = tys;
 		this.type = type;
 		this.tl_controller_id = tl_controller_id;
 		this.coordinates = coordinates;
+		this.signal_Orientation = signal_Orientation;
 	}
 
 	@Override
@@ -113,5 +117,15 @@ public class Arm_traffic_light {
 	public void setCoordinates(Point coordinates) {
 		this.coordinates = coordinates;
 	}
+
+	public int getSignal_Orientation() {
+		return signal_Orientation;
+	}
+
+	public void setSignal_Orientation(int signal_Orientation) {
+		this.signal_Orientation = signal_Orientation;
+	}
+	
+	
 	
 }

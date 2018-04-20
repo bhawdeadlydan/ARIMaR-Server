@@ -160,7 +160,7 @@ public class BimController {
 		CoordinateSequence pos = object.getCoordinates().getCoordinateSequence();
 		dtoObject.setCoordinatesX(pos.getCoordinate(0).x);
 		dtoObject.setCoordinatesY(pos.getCoordinate(0).y);
-		
+				
 		
 		//bim_intersection
 		Bim_Intersection intersectionObject = bim_intersection_repository.findOne(1);
@@ -302,6 +302,9 @@ public class BimController {
 			dtoObject.setCoordinatesX(pos.getCoordinate(0).x);
 			dtoObject.setCoordinatesY(pos.getCoordinate(0).y);
 
+			//get signal's orientation
+			dtoObject.setSignal_Orientation(ob.getSignal_Orientation());
+						
 			objList.add(dtoObject);
 		}
 		return objList;

@@ -47,6 +47,7 @@ public class DTO{
 	private int tl_Traffic_controller_id;
 	private double coordinatesX; 
 	private double coordinatesY;
+	private int signal_Orientation;
 
 	//gis_crosswalks
 	private int gis_crosswalks_id;
@@ -386,6 +387,16 @@ public class DTO{
 
 	public void setCoordinatesY(double coordinatesY) {
 		this.coordinatesY = coordinatesY;
+	}
+
+	
+	public int getSignal_Orientation() {
+		return signal_Orientation;
+	}
+
+
+	public void setSignal_Orientation(int signal_Orientation) {
+		this.signal_Orientation = signal_Orientation;
 	}
 
 
