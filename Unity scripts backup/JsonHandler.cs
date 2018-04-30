@@ -2,14 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// class for handling json objects
+/// </summary>
 public class JsonHandler : MonoBehaviour
 {
+    /// <summary>
+    /// gets from json
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="json"></param>
+    /// <returns></returns>
     public static T[] FromJson<T>(string json)
     {
         Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
         return wrapper.Items;
     }
 
+    /// <summary>
+    /// COnverts to json
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="array"></param>
+    /// <returns></returns>
     public static string ToJson<T>(T[] array)
     {
         Wrapper<T> wrapper = new Wrapper<T>();
@@ -17,6 +32,13 @@ public class JsonHandler : MonoBehaviour
         return JsonUtility.ToJson(wrapper);
     }
 
+    /// <summary>
+    /// Converts to json in a pretty way
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="array"></param>
+    /// <param name="prettyPrint"></param>
+    /// <returns></returns>
     public static string ToJson<T>(T[] array, bool prettyPrint)
     {
         Wrapper<T> wrapper = new Wrapper<T>();
@@ -31,6 +53,10 @@ public class JsonHandler : MonoBehaviour
     }
 }
 
+/// <summary>
+/// <para>Class for the server objects instance variables</para>
+/// The instance variables names must be spelt exactly as in the DTO object class (Java RESTful server)
+/// </summary>
 [System.Serializable]
 public class ServerObject
 {
@@ -38,8 +64,8 @@ public class ServerObject
     public string amenity ;
     public string highway ;
     public string tags ;
-    public double wayX ;
-    public double wayY ;
+    public float wayX ;
+    public float wayY ;
     public int tl__Controller_controller_id ;
     public int cmp_longersection_id ;
     public int tl_group_id ;
@@ -61,24 +87,27 @@ public class ServerObject
     public int tys ;
     public string type ;
     public int tl_Traffic_controller_id ;
-    public double coordinatesX ;
-    public double coordinatesY ;
+    public float coordinatesX ;
+    public float coordinatesY ;
+    public int signal_Orientation ;
     public int gis_crosswalks_id ;
     public int gis_crosswalks_intersection_id ;
-    public double gis_crosswalk_coordinatesX ;
-    public double gis_crosswalk_coordinatesY ;
+    public float gis_crosswalk_coordinatesX ;
+    public float gis_crosswalk_coordinatesY ;
     public int bim_crosswalks_id ;
     public int bim_crosswalks_intersection_id ;
-    public int bim_crosswalks_material_id ;
+    public string bim_crosswalks_material_id ;
     public int bim_intersection_id ;
-    public object bim_intersection_description ;
+    public string bim_intersection_description ;
     public int gis_espiras_id ;
     public int gis_espiras_intersection_id ;
-    public double gis_espiras_coordinatesX ;
-    public double gis_espiras_coordinatesY ;
+    public float gis_espiras_coordinatesX ;
+    public float gis_espiras_coordinatesY ;
     public int bim_espiras_id ;
     public int bim_espiras_intersection_id ;
-    public int bim_espiras_material_id ;
-    public object bim_espiras_tipologia ;
+    public string bim_espiras_material_id ;
+    public string bim_espiras_tipologia ;
+    public string created;
+
 }
 
