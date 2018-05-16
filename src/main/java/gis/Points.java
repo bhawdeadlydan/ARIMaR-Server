@@ -7,17 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.geolatte.geom.Point;
+import com.vividsolutions.jts.geom.Point;
 
 
 /***
  * This class represents the planet_osm_point table to the spring boot framework
  * The parameters used are:
- *  * osm_id --> object id
- *  * amenity --> type of object (cafe, etc)
- *  * highway --> traffic_lights
- *  * tags --> hstore type --> "crossing"=>"traffic_signals" or "button_operated"=>"yes"
- *  * way --> geometry --> Point --> coordinates
+ *  @param osm_id object id, type long
+ *  @param amenity type of object (cafe, etc), type String
+ *  @param highway traffic_lights, type String
+ *  @param tags "crossing"=>"traffic_signals" or "button_operated"=>"yes", type String (hstore)
+ *  @param way coordinates, type Point
  * @author JoelCarneiro
  *
  */

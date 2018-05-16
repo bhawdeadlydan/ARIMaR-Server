@@ -1,0 +1,24 @@
+insert para o tipo geography
+
+update arm_traffic_light set coordinates = ST_SetSRID(ST_MakePoint(-960108.52, 5035954.24),4326) where traffic_light_id = 1
+
+
+
+UPDATE materials SET cost = 50 WHERE cost = 1000;
+
+
+SELECT *
+	FROM bim_crosswalks 
+	INNER JOIN bim_materials ON (bim_crosswalks.material_id = bim_materials.id);
+	
+	
+	
+	
+ALTER TABLE products ADD FOREIGN KEY (product_group_id) REFERENCES product_groups;
+
+
+
+ALTER TABLE distributors ADD COLUMN address varchar(30);
+
+//geometry to points
+SELECT * FROM arm_traffic_light, ST_AsText(coordinates) as points ;
